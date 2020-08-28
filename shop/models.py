@@ -12,7 +12,7 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
     def get_absolute_url(self):
-        return reverse('shop:product_list_by_category', kwargs={'slug': self.slug})
+        return reverse('shop:product_list_by_category', kwargs={'category_slug': self.slug})
 
     def __str__(self):
         return self.name
@@ -36,7 +36,7 @@ class Product(models.Model):
         verbose_name_plural = 'Товары'
 
     def get_absolute_url(self):
-        return reverse('shop:product_detail', kwargs={'slug': self.slug})
+        return reverse('shop:product_detail', kwargs={'id': self.id, 'slug': self.slug})
 
     def __str__(self):
         return self.name
