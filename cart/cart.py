@@ -31,12 +31,10 @@ class Cart(object):
             del self.cart[product_id]
             self.save()
 
-   # total price of all items in cart
+    # total price of all items in cart
     def get_total_price(self):
-        total_price = 0
-        for item in self.cart.values():
-            total_price += Decimal(item['quantity'] * item['price'])
-        return total_price
+        return sum(Decimal(item['price']) * item['quantity']
+                   for item in self.cart.values())
 
     # clear cart
     def clear(self):
