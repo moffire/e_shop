@@ -131,3 +131,6 @@ MEDIA_URL = '/media/'
 
 # session settings for product basket (cart)
 CART_SESSION_ID = 'cart'
+
+# email backend
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
