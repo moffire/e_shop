@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+from braintree import Configuration, Environment
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +139,16 @@ CART_SESSION_ID = 'cart'
 
 # email backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# braintree payment settings
+
+BRAINTREE_MERCHANT_ID = os.getenv('SECRET_BRAINTREE_MERCHANT_ID')
+BRAINTREE_PUBLIC_ID = os.getenv('SECRET_BRAINTREE_PUBLIC_ID')
+BRAINTREE_PRIVATE_ID = os.getenv('SECRET_BRAINTREE_PRIVATE_ID')
+
+Configuration.configure(
+    Environment.Sandbox,
+    BRAINTREE_MERCHANT_ID,
+    BRAINTREE_PUBLIC_ID,
+    BRAINTREE_PRIVATE_ID
+)
