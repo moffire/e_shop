@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-from braintree import Configuration, Environment
+import braintree
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -146,9 +146,9 @@ BRAINTREE_MERCHANT_ID = os.getenv('SECRET_BRAINTREE_MERCHANT_ID')
 BRAINTREE_PUBLIC_ID = os.getenv('SECRET_BRAINTREE_PUBLIC_ID')
 BRAINTREE_PRIVATE_ID = os.getenv('SECRET_BRAINTREE_PRIVATE_ID')
 
-Configuration.configure(
-    Environment.Sandbox,
-    BRAINTREE_MERCHANT_ID,
-    BRAINTREE_PUBLIC_ID,
-    BRAINTREE_PRIVATE_ID
+braintree.Configuration.configure(
+    braintree.Environment.Sandbox,
+    merchant_id=BRAINTREE_MERCHANT_ID,
+    public_key=BRAINTREE_PUBLIC_ID,
+    private_key=BRAINTREE_PRIVATE_ID
 )
